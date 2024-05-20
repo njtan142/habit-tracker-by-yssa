@@ -38,4 +38,13 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/calendar_moth_year_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/home_calendar_view"
+        app:layout_constraintEnd_toEndOf="@+id/home_calendar_view"
+        app:layout_constraintStart_toStartOf="@+id/home_calendar_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

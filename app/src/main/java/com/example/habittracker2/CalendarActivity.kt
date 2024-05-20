@@ -30,12 +30,21 @@ import com.kizitonwose.calendar.view.ViewContainer
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.Month
 import java.time.YearMonth
 import java.time.ZoneId
 import java.time.format.TextStyle
 import java.util.Date
 import java.util.Locale
 
+fun YearMonth.displayText(short: Boolean = false): String {
+    return "${this.month.displayText(short = short)} ${this.year}"
+}
+
+fun Month.displayText(short: Boolean = true): String {
+    val style = if (short) TextStyle.SHORT else TextStyle.FULL
+    return getDisplayName(style, Locale.ENGLISH)
+}
 internal fun Context.getColorCompat(@ColorRes color: Int) =
     ContextCompat.getColor(this, color)
 
@@ -57,6 +66,7 @@ class CalendarActivity : AppCompatActivity() {
     private var selectedDate: LocalDate? = null
     private var allPeriods = mutableListOf<Habit>()
     private var mappedPeriods: Map<LocalDate, List<Habit>>? = null
+    private lateinit var monthYearView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +79,7 @@ class CalendarActivity : AppCompatActivity() {
         }
 
         calendarView = findViewById(R.id.home_calendar_view)
+        monthYearView = findViewById(R.id.calendar_moth_year_textview)
         getPeriods()
 
         // Initialize the back button and set its click listener
@@ -115,6 +126,15 @@ class CalendarActivity : AppCompatActivity() {
         configureBinders(daysOfWeek)
         calendarView.setup(startMonth, endMonth, daysOfWeek.first())
         calendarView.scrollToMonth(currentMonth)
+
+        calendarView.monthScrollListener = { month ->
+            monthYearView.text = month.yearMonth.displayText()
+
+            selectedDate?.let {
+                selectedDate = null
+                calendarView.notifyDateChanged(it)
+            }
+        }
     }
 
     private fun configureBinders(daysOfWeek: List<DayOfWeek>) {
