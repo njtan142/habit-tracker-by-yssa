@@ -1,6 +1,5 @@
 package com.example.habittracker2
 
-import EditProfile
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
