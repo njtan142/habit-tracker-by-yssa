@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.ColorRes
@@ -69,6 +70,12 @@ class CalendarActivity : AppCompatActivity() {
 
         calendarView = findViewById(R.id.home_calendar_view)
         getPeriods()
+
+        // Initialize the back button and set its click listener
+        val backButton = findViewById<Button>(R.id.back_button)
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     fun getPeriods() {
@@ -156,11 +163,13 @@ class CalendarActivity : AppCompatActivity() {
                                 Log.d("habits ni yssa", period.toString());
                                 if (period != null) {
                                     val setColor = when (color) {
-                                        "Green" -> (Color.GREEN)
-                                        "Red" -> (Color.RED)
-                                        "Blue" -> (Color.BLUE)
-                                        "Yellow" -> (Color.YELLOW)
-                                        else -> {Color.WHITE}
+                                        "Light Pink" -> android.graphics.Color.parseColor("#FFB6C1")
+                                        "Pink" -> android.graphics.Color.parseColor("#FFC0CB")
+                                        "Hot Pink" -> android.graphics.Color.parseColor("#FF69B4")
+                                        "Deep Pink" -> android.graphics.Color.parseColor("#FF1493")
+                                        "Pale Violet Red" -> android.graphics.Color.parseColor("#DB7093")
+                                        "Medium Violet Red" -> android.graphics.Color.parseColor("#C71585")
+                                        else -> android.graphics.Color.WHITE
                                     }
                                     Log.d("habits ni yssa", setColor.toString());
                                     frame.setBackgroundColor(setColor)

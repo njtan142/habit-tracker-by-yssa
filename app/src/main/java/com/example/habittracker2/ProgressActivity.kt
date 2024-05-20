@@ -1,6 +1,7 @@
 package com.example.habittracker2
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,13 @@ class ProgressActivity : AppCompatActivity() {
 
         // Fetch habit data from Firestore
         fetchHabitData()
+
+        val backButton = findViewById<Button>(R.id.back_button)
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
     }
+
 
     private fun fetchHabitData() {
         val id = FirebaseAuth.getInstance().currentUser!!.uid

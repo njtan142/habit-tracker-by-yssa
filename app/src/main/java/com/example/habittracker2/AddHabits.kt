@@ -1,9 +1,9 @@
 package com.example.habittracker2
 
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -23,6 +23,7 @@ class AddHabits : AppCompatActivity() {
     private lateinit var timeEditText: EditText
     private lateinit var colorSpinner: Spinner
     private lateinit var addHabitButton: Button
+    private lateinit var colorPreview: View
 
     private val myCalendar = Calendar.getInstance()
     private val datePicker = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -48,9 +49,10 @@ class AddHabits : AppCompatActivity() {
         timeEditText = findViewById(R.id.time_edittext)
         colorSpinner = findViewById(R.id.color_spinner)
         addHabitButton = findViewById(R.id.add_habit_button)
+        colorPreview = findViewById(R.id.color_preview)
 
         // Create an ArrayAdapter using the color options array and a default spinner layout
-        val colorOptions = arrayOf("Red", "Blue", "Green", "Yellow")
+        val colorOptions = arrayOf("Light Pink", "Pink", "Hot Pink", "Deep Pink", "Pale Violet Red", "Medium Violet Red")
         val colorAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, colorOptions)
 
         // Specify the layout to use when the list of choices appears
@@ -59,12 +61,23 @@ class AddHabits : AppCompatActivity() {
         // Apply the adapter to the spinner
         colorSpinner.adapter = colorAdapter
 
-        // Set a listener to capture the selected color
+        // Set a listener to capture the selected color and change the color of the colorPreview view
         colorSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // Get the selected color
                 val selectedColor = colorOptions[position]
-                // You can use the selected color as needed (e.g., store it in Firebase)
+
+                // Update the background color of the colorPreview view based on the selected color
+                val color = when (selectedColor) {
+                    "Light Pink" -> Color.parseColor("#FFB6C1")
+                    "Pink" -> Color.parseColor("#FFC0CB")
+                    "Hot Pink" -> Color.parseColor("#FF69B4")
+                    "Deep Pink" -> Color.parseColor("#FF1493")
+                    "Pale Violet Red" -> Color.parseColor("#DB7093")
+                    "Medium Violet Red" -> Color.parseColor("#C71585")
+                    else -> Color.WHITE
+                }
+                colorPreview.setBackgroundColor(color)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {

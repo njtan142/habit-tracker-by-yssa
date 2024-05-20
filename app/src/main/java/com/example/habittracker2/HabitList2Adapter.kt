@@ -57,12 +57,15 @@ class HabitList2Adapter(
         val color = data["color"].toString()
 
         val setColor = when (color) {
-            "Red" -> android.graphics.Color.RED
-            "Blue" -> android.graphics.Color.BLUE
-            "Green" -> android.graphics.Color.GREEN
-            "Yellow" -> android.graphics.Color.YELLOW
-            else -> android.graphics.Color.WHITE // default color if option is not recognized
+            "Light Pink" -> android.graphics.Color.parseColor("#FFB6C1")
+            "Pink" -> android.graphics.Color.parseColor("#FFC0CB")
+            "Hot Pink" -> android.graphics.Color.parseColor("#FF69B4")
+            "Deep Pink" -> android.graphics.Color.parseColor("#FF1493")
+            "Pale Violet Red" -> android.graphics.Color.parseColor("#DB7093")
+            "Medium Violet Red" -> android.graphics.Color.parseColor("#C71585")
+            else -> android.graphics.Color.WHITE
         }
+
 
         viewHolder.card.setCardBackgroundColor(setColor)
 
@@ -76,8 +79,8 @@ class HabitList2Adapter(
     private fun openDeleteCategoryDialog(ref: DocumentReference) {
         val builder = AlertDialog.Builder(context
         )
-        builder.setTitle("Delete Journal")
-            .setMessage("Are you sure you want to delete this journal?")
+        builder.setTitle("Delete Habit")
+            .setMessage("Are you sure you want to delete this habit?")
         builder.setPositiveButton(
             "Yes"
         ) { dialog, which ->

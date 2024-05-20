@@ -37,16 +37,16 @@ class EditHabits : AppCompatActivity() {
         setContentView(R.layout.activity_edit_habits)
 
         // Initialize views
-        habitNameEditText = findViewById(R.id.edit_habit_name)
-        timeEditText = findViewById<EditText>(R.id.edit_habit_time)
-        colorSpinner = findViewById(R.id.edit_color_spinner)
-        selectDateButton = findViewById(R.id.edit_select_date_button)
-        saveButton = findViewById(R.id.edit_save_button)
-        db = FirebaseFirestore.getInstance()
-        habitId = intent.getStringExtra("habit_id")
-        loadHabitData()
-        selectDateButton?.setOnClickListener { showDatePicker() }
-        saveButton?.setOnClickListener { saveHabitData() }
+//        habitNameEditText = findViewById(R.id.edit_habit_name)
+//        timeEditText = findViewById<EditText>(R.id.edit_habit_time)
+//        colorSpinner = findViewById(R.id.edit_color_spinner)
+//        selectDateButton = findViewById(R.id.edit_select_date_button)
+//        saveButton = findViewById(R.id.edit_save_button)
+//        db = FirebaseFirestore.getInstance()
+//        habitId = intent.getStringExtra("habit_id")
+//        loadHabitData()
+//        selectDateButton?.setOnClickListener { showDatePicker() }
+//        saveButton?.setOnClickListener { saveHabitData() }
 
     }
 

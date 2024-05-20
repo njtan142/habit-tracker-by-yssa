@@ -14,13 +14,13 @@ class DashboardActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
 
-        val viewHabits: Button = findViewById(R.id.viewhabits1_button)
+        val viewHabits: Button = findViewById(R.id.editprofile_button)
         viewHabits.setOnClickListener {
             val intent = Intent(this@DashboardActivity, HabitsActivity::class.java)
             startActivity(intent)
         }
 
-        val viewProgress: Button = findViewById(R.id.edithabits_button)
+        val viewProgress: Button = findViewById(R.id.logout_button)
         viewProgress.setOnClickListener {
             val intent = Intent(this@DashboardActivity, ProgressActivity::class.java)
             startActivity(intent)

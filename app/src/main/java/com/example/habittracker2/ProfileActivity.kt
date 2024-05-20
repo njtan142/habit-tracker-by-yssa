@@ -1,5 +1,6 @@
 package com.example.habittracker2
 
+import EditProfile
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -23,15 +24,25 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        findViewById<Button>(R.id.edithabits_button)
-            .setOnClickListener {
-                run {
-                    FirebaseAuth.getInstance()
-                        .signOut()
-                    val intent = Intent(this@ProfileActivity, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(intent)
-                }
-            }
+        // Listener for the "Edit Profile" button
+        val editUserProfileButton = findViewById<Button>(R.id.editprofile_button)
+        editUserProfileButton.setOnClickListener {
+            val intent = Intent(this, EditProfile::class.java)
+            startActivity(intent)
+        }
+
+        // Listener for the "Logout" button
+        findViewById<Button>(R.id.logout_button).setOnClickListener {
+            FirebaseAuth.getInstance().signOut() // Log out the user
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            finish() // Finish this activity after starting MainActivity
+        }
+
+        // Listener for the "Back" button
+        findViewById<Button>(R.id.back_button).setOnClickListener {
+            onBackPressed()
+        }
     }
 }
