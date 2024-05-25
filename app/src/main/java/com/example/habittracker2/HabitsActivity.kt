@@ -22,17 +22,13 @@ class HabitsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val addHabits: Button = findViewById(R.id.editprofile_button)
+        val addHabits: Button = findViewById(R.id.addhabits_button)
         addHabits.setOnClickListener {
             val intent = Intent(this@HabitsActivity, AddHabits::class.java)
             startActivity(intent)
         }
 
-        val editHabits: Button = findViewById(R.id.logout_button)
-        editHabits.setOnClickListener {
-            val intent = Intent(this@HabitsActivity, EditHabits::class.java)
-            startActivity(intent)
-        }
+
 
         val viewHabits: Button = findViewById(R.id.viewhabits_button)
         viewHabits.setOnClickListener {

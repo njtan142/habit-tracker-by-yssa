@@ -58,21 +58,14 @@ class HabitListAdapter(
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         val data = dataSet[position].data!!
+        var habit = dataSet[position].toObject(Activity::class.java);
+        habit?.path = dataSet[position].reference.path
         viewHolder.title.text = data["name"].toString()
         viewHolder.time.text = data["time"].toString()
         viewHolder.selectedDays.text = data["date"].toString()
         val completed = data["completed"].toString().toBoolean()
         viewHolder.completed.isChecked = completed
 
-        viewHolder.card.setOnClickListener {
-            val intent = Intent(context, CalendarActivity::class.java)
-            context.startActivity(intent)
-        }
-
-        viewHolder.card.setOnClickListener {
-            run {
-            }
-        }
 
         viewHolder.card.setOnLongClickListener {
             run {
@@ -108,6 +101,20 @@ class HabitListAdapter(
 
 
         viewHolder.card.setCardBackgroundColor(setColor)
+
+        var lastClickTime = 0L
+        viewHolder.card.setOnClickListener {
+            val currentTime = System.currentTimeMillis()
+            if (currentTime - lastClickTime < 300) {
+                // Handle double-click event
+//                handleDoubleClick(dataSet[position])
+                UserData.habitToEdit = habit;
+                val intent = Intent(context, EditHabit::class.java);
+                context.startActivity(intent);
+
+            }
+            lastClickTime = currentTime
+        }
     }
 
     private fun openDeleteCategoryDialog(ref: DocumentReference) {

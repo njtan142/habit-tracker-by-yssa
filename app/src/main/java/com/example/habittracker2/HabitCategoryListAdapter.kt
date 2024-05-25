@@ -4,23 +4,21 @@ package com.example.habittracker2
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 
-class HabitList2Adapter(
+class HabitCategoryListAdapter(
     private val context: Context,
     private var dataSet: List<DocumentSnapshot>,
     private val reloader: () -> Unit
 ) :
-    RecyclerView.Adapter<HabitList2Adapter.ViewHolder>() {
+    RecyclerView.Adapter<HabitCategoryListAdapter.ViewHolder>() {
 
     /**
      * Provide memo_backgrounds reference to the type of views that you are using

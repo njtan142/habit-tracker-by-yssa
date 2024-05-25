@@ -7,12 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 
 class ProgressActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var habitListAdapter: HabitList2Adapter
+    private lateinit var habitListAdapter: HabitCategoryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,7 @@ class ProgressActivity : AppCompatActivity() {
             .addOnSuccessListener { querySnapshot ->
                 val habitsList = querySnapshot.documents
                 // Update the adapter with the fetched data
-                habitListAdapter = HabitList2Adapter(this@ProgressActivity, habitsList, {fetchHabitData()})
+                habitListAdapter = HabitCategoryListAdapter(this@ProgressActivity, habitsList, {fetchHabitData()})
 
                 recyclerView.adapter = habitListAdapter
             }

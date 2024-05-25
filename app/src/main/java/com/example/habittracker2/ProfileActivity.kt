@@ -24,7 +24,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setListeners() {
         // Listener for the "Edit Profile" button
-        val editUserProfileButton = findViewById<Button>(R.id.editprofile_button)
+        val editUserProfileButton = findViewById<Button>(R.id.addhabits_button)
         editUserProfileButton.setOnClickListener {
             val intent = Intent(this, EditProfile::class.java)
             startActivity(intent)

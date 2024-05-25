@@ -16,7 +16,7 @@
             android:name=".EditProfile"
             android:exported="false" />
         <activity
-            android:name=".E"
+            android:name=".EditHabit"
             android:exported="false" />
         <activity
             android:name=".habit_item2"

@@ -14,7 +14,7 @@ class DashboardActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
 
-        val viewHabits: Button = findViewById(R.id.editprofile_button)
+        val viewHabits: Button = findViewById(R.id.addhabits_button)
         viewHabits.setOnClickListener {
             val intent = Intent(this@DashboardActivity, HabitsActivity::class.java)
             startActivity(intent)

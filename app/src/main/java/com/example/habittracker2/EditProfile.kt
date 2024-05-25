@@ -18,6 +18,7 @@ class EditProfile : AppCompatActivity() {
     private lateinit var yourName: EditText
     private lateinit var editEmail: EditText
     private lateinit var yourEmail: EditText
+    private lateinit var editCurrentPassword: EditText
     private lateinit var editPassword: EditText
     private lateinit var changeProfileButton: Button
     private lateinit var auth: FirebaseAuth
@@ -41,6 +42,7 @@ class EditProfile : AppCompatActivity() {
         editEmail = findViewById(R.id.edit_email)
         yourEmail = findViewById(R.id.your_email)
         editPassword = findViewById(R.id.edit_password)
+        editCurrentPassword = findViewById(R.id.current_password)
         changeProfileButton = findViewById(R.id.change_profile_button)
     }
 
@@ -91,7 +93,7 @@ class EditProfile : AppCompatActivity() {
 //                                        "email" to newEmail
                                     ))
                                     .addOnSuccessListener {
-                                        Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this, "Profile name updated", Toast.LENGTH_SHORT).show()
                                     }
                                     .addOnFailureListener {
                                         Toast.makeText(this, "Failed to update Firestore", Toast.LENGTH_SHORT).show()
@@ -107,7 +109,7 @@ class EditProfile : AppCompatActivity() {
                     user.verifyBeforeUpdateEmail(newEmail)
                         .addOnCompleteListener { emailTask ->
                             if (emailTask.isSuccessful) {
-                                Toast.makeText(this, "Email updated", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Email updated, check your email on this new email", Toast.LENGTH_SHORT).show()
                                 db.collection("users").document(user.uid)
                                     .update(mapOf(
 //                                        "name" to newName,
@@ -127,14 +129,24 @@ class EditProfile : AppCompatActivity() {
                 }
 
                 if (newPassword.isNotEmpty()) {
-                    user.updatePassword(newPassword)
-                        .addOnCompleteListener { passwordTask ->
-                            if (passwordTask.isSuccessful) {
-                                Toast.makeText(this, "Password updated", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
-                            }
+                    val currentPassword = editCurrentPassword.text.toString().trim()
+                    auth.signInWithEmailAndPassword(user.email!!, currentPassword)
+                        .addOnSuccessListener {
+                            val user = it.user!!
+                            user.updatePassword(newPassword)
+                                .addOnCompleteListener { passwordTask ->
+                                    if (passwordTask.isSuccessful) {
+                                        Toast.makeText(this, "Password updated", Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
+                                        Log.d("update password", passwordTask.exception.toString())
+                                    }
+                                }
+                        }.addOnFailureListener {
+                            Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
                         }
+
+
                 }
             }
         }
